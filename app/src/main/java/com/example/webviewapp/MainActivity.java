@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -13,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Private members
+
+    private WebView myWebView;
 
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
@@ -29,13 +35,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Lägger till WebView-element:
+        WebView myWebView = findViewById(R.id.my_webview);
+
+        WebViewClient myWebViewClient = new WebViewClient();    // Detta
+        myWebView.setWebViewClient(myWebViewClient);            // Och detta gör att vi anv vår egen webviewclient
+        myWebView.loadUrl("https://www.his.se");
+
         /*
-        * Rename your App. Tip: Values->Strings
-        * Enable Internet access for your App. Tip: Manifest
-        * Create a WebView element in the layout file content_main.xml
-        * Give the WebView element ID "my_webview"
+        + Rename your App. Tip: Values->Strings
+        + Enable Internet access for your App. Tip: Manifest
+        + Create a WebView element in the layout file content_main.xml
+        + Give the WebView element ID "my_webview"
         -- Commit and push to your github fork
-        * Create a private member variable called "myWebView" of type WebView
+        + Create a private member variable called "myWebView" of type WebView (HärÄrViKlara)
         * Locate the WebView element created in step 1 using the ID created in step 2
         * Create a new WebViewClient to attach to our WebView. This allows us to
           browse the web inside our app.
