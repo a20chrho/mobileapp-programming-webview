@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private WebView myWebView;
 
     public void showExternalWebPage(){
-        myWebView.loadUrl("https://yahoo.com");
+        myWebView.loadUrl("https://google.com");
     }
 
     public void showInternalWebPage(){
@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        //Laddar en startsida
+        myWebView.loadUrl("file:///android_asset/startup.html");
+
         /*
         + Rename your App. Tip: Values->Strings
         + Enable Internet access for your App. Tip: Manifest
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
           when you select menu options "External Web Page" or "Internal Web Page"
           respectively
         -- Commit and push to your github fork
-        * Take two screenshots using the "Take a screenshot" tool in the AVD
+        + Take two screenshots using the "Take a screenshot" tool in the AVD
            showing your App. One (1) screenshot showing your internal web page and
            one (1) screenshot showing your external web page.
         */
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Clicking this does nothing.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
