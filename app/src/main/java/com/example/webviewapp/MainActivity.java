@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -17,15 +18,14 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     // Private members
-
     private WebView myWebView;
 
     public void showExternalWebPage(){
-        // TODO: Add your code for showing external web page here
+        myWebView.loadUrl("https://yahoo.com");
     }
 
     public void showInternalWebPage(){
-        // TODO: Add your code for showing internal web page here
+        myWebView.loadUrl("file:///android_asset/test.html");
     }
 
     @Override
@@ -36,11 +36,16 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Lägger till WebView-element:
-        WebView myWebView = findViewById(R.id.my_webview);
+        myWebView = findViewById(R.id.my_webview);
 
-        WebViewClient myWebViewClient = new WebViewClient();    // Detta
-        myWebView.setWebViewClient(myWebViewClient);            // Och detta gör att vi anv vår egen webviewclient
-        myWebView.loadUrl("https://www.his.se");
+        //Använd får egen WebViewClient
+        WebViewClient myWebViewClient = new WebViewClient();
+        myWebView.setWebViewClient(myWebViewClient);
+
+        //Enable Javascript
+
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
         /*
         + Rename your App. Tip: Values->Strings
@@ -48,17 +53,17 @@ public class MainActivity extends AppCompatActivity {
         + Create a WebView element in the layout file content_main.xml
         + Give the WebView element ID "my_webview"
         -- Commit and push to your github fork
-        + Create a private member variable called "myWebView" of type WebView (HärÄrViKlara)
-        * Locate the WebView element created in step 1 using the ID created in step 2
-        * Create a new WebViewClient to attach to our WebView. This allows us to
+        + Create a private member variable called "myWebView" of type WebView
+        + Locate the WebView element created in step 1 using the ID created in step 2
+        + Create a new WebViewClient to attach to our WebView. This allows us to
           browse the web inside our app.
         -- Commit and push to your github fork
-        * Enable Javascript execution in your WebViewClient
-        * Enter the url to load in our WebView
+        + Enable Javascript execution in your WebViewClient
+        + Enter the url to load in our WebView
         -- Commit and push to your github fork
-        * Move the code that loads a URL into your WebView into the two methods
+        + Move the code that loads a URL into your WebView into the two methods
           "showExternalWebPage()" and "showInternalWebPage()".
-        * Call the "showExternalWebPage()" / "showInternalWebPage()" methods
+        + Call the "showExternalWebPage()" / "showInternalWebPage()" methods
           when you select menu options "External Web Page" or "Internal Web Page"
           respectively
         -- Commit and push to your github fork
@@ -94,11 +99,13 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_external_web) {
             Log.d("==>","Will display external web page");
+            showExternalWebPage();
             return true;
         }
 
         if (id == R.id.action_internal_web) {
             Log.d("==>","Will display internal web page");
+            showInternalWebPage();
             return true;
         }
 
